@@ -1,0 +1,136 @@
+// app.scss
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Roboto, sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  padding: 2rem;
+}
+
+.upperSection {
+  background-color: rgb(57, 62, 70);
+  padding: 20px;
+}
+
+.innerSection {
+  background-color: rgb(0, 173, 181);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+h5 {
+  margin-bottom: 0.5rem;
+}
+
+.counter {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+p {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: #7f8c8d;
+  font-weight: 500;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+/* Add this layout container for the buttons */
+.button-group {
+  display: flex;
+  gap: 15px; /* Space between buttons */
+  margin-bottom: 2rem;
+}
+
+/* Base button styles (shared logic) */
+.reset-btn,
+.toggle-btn {
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+}
+
+/* Reset button specific color (Blue) */
+.reset-btn {
+  background-color: #3498db;
+  &:hover {
+    background-color: #2980b9;
+  }
+}
+
+/* Toggle button specific color (Red for Off, Green for On) */
+.toggle-btn {
+  background-color: #e74c3c; /* Red when Active (to turn off) */
+  &:hover {
+    background-color: #c0392b;
+  }
+
+  /* We apply this class dynamically in the HTML when the camera is off */
+  &.off {
+    background-color: #2ecc71; /* Green when Inactive (to turn on) */
+    &:hover {
+      background-color: #27ae60;
+    }
+  }
+}
+
+.paused-text {
+  animation: none; /* Remove the pulsing animation from the "paused" text */
+  color: #eeeeee;
+}
+
+.video-wrapper {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  background-color: #000;
+
+  /* Make it fill the width, up to a maximum size */
+  width: 100%;
+  max-width: 600px;
+
+  /* Make it take up 65% of the screen height, so it's nice and tall on phones */
+  height: 65vh;
+  min-height: 400px; /* Ensures it doesn't get too small on tiny screens */
+
+  video {
+    display: block;
+    transform: scaleX(-1);
+    width: 100%;
+    height: 100%;
+
+    /* This is the magic property! It ensures the video fills the tall box 
+       without stretching or distorting the image */
+    object-fit: cover;
+  }
+}

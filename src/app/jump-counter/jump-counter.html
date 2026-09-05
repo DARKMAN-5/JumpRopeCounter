@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="upperSection">
+    <div class="innerSection">
+      <span>Jump Rope Counter</span>
+      <span class="counter">Jumps: {{ jumpCount }}</span>
+
+      <!-- Group the buttons together -->
+      <div class="button-group">
+        <button class="reset-btn" (click)="resetCounter()">Reset Counter</button>
+
+        <!-- Dynamic button that changes text based on camera state -->
+        <button class="toggle-btn" [ngClass]="{ off: !isCameraActive }" (click)="toggleCamera()">
+          {{ isCameraActive ? 'Turn Camera Off' : 'Turn Camera On' }}
+        </button>
+      </div>
+    </div>
+    <div class="video-wrapper" [hidden]="!isCameraActive">
+      <video #videoElement autoplay playsinline muted width="640" height="480"></video>
+    </div>
+  </div>
+
+  <p *ngIf="isLoading">Loading AI Model... Please wait.</p>
+
+  <!-- Add a message when camera is turned off -->
+  <p *ngIf="!isLoading && !isCameraActive" class="paused-text">Camera is paused.</p>
+
+  <!-- Hide the video wrapper completely when camera is off -->
+</div>
