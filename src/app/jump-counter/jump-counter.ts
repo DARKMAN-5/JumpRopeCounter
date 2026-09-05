@@ -27,6 +27,14 @@ export class JumpCounter implements AfterViewInit {
   // We use NgZone so Angular knows when to update the UI from the animation frame
   constructor(private ngZone: NgZone) {}
 
+  ngOnInit() {
+    if (window.innerWidth < 768) {
+      this.JUMP_THRESHOLD = 12; // Mobile (further away)
+    } else {
+      this.JUMP_THRESHOLD = 25; // Desktop (closer)
+    }
+  }
+
   async ngAfterViewInit() {
     await this.setupCamera();
     await this.loadModel();
@@ -80,7 +88,7 @@ export class JumpCounter implements AfterViewInit {
       const detectorConfig = { modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING };
       this.detector = await poseDetection.createDetector(
         poseDetection.SupportedModels.MoveNet,
-        detectorConfig
+        detectorConfig,
       );
 
       console.log('Model loaded successfully!');
